@@ -1,30 +1,40 @@
 import { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
 import postService from "./services/posts";
+import NavigationBar from "./components/NavigationBar";
+import Footer from "./components/Footer";
+
+import Home from "./pages/Home";
+import Posts from "./pages/Posts";
+import About from "./pages/About";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    console.log("effect");
-    //prettier-ignore
+    console.log("effect ran");
     postService
       .getAll()
       .then((response) => {
         console.log("promise fulfilled");
-        setPosts(response.data)
+        setPosts(response.data);
       })
       .catch((error) => {
-        console.log("caught error:", error)
-      })
+        console.log("promise rejected");
+        console.error("caught error:", error);
+      });
   }, []);
 
   return (
     <div>
-      <h1>Home view of Nøkian Monark web application</h1>
-      <h2>Posts from backend</h2>
-      {posts.map((post) => (
-        <p key={post.id}>{post.content}</p>
-      ))}
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<Posts posts={posts} />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+      <Footer />
     </div>
   );
 };
