@@ -2,10 +2,9 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="footerdiv">
-      <br />
-      <em>© Nøkian Monark {year}</em>
-    </div>
+    <footer>
+      <em>&copy; Nøkian Monark {year}</em>
+    </footer>
   );
 };
 

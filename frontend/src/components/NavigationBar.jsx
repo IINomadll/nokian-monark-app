@@ -5,9 +5,10 @@ const NavigationBar = () => {
     paddingRight: 5,
   };
 
+  // selvitä, onko parempi käyttää id:tä vai classname:a
   return (
-    <header className="navHeader">
-      <nav>
+    <header>
+      <nav aria-label="primary-navigation">
         <Link to="/" style={padding}>
           Home
         </Link>

@@ -1,13 +1,13 @@
 const Posts = ({ posts }) => {
   return (
-    <>
-      <h2>Posts from backend</h2>
-      <div className="postsdiv">
+    <section>
+      <h1>Posts from backend</h1>
+      <div>
         {posts.map((post) => (
           <p key={post.id}>{post.content}</p>
         ))}
       </div>
-    </>
+    </section>
   );
 };
 
