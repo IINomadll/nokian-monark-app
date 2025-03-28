@@ -4,4 +4,7 @@
 # REST client requests
 **/requests
 
+# scripts
+**/scripts
+
 **/.env

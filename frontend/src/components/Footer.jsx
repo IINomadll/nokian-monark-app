@@ -3,6 +3,7 @@ const Footer = () => {
 
   return (
     <footer>
+      <hr />
       <em>&copy; Nøkian Monark {year}</em>
     </footer>
   );

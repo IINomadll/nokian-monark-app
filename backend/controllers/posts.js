@@ -20,6 +20,7 @@ postsRouter.post("/", (request, response, next) => {
   const body = request.body;
 
   const newPost = new Post({
+    title: body.title,
     content: body.content,
     created: Date.now(),
   });
@@ -33,12 +34,13 @@ postsRouter.post("/", (request, response, next) => {
 });
 
 postsRouter.put("/:id", (request, response, next) => {
-  const { content } = request.body;
+  const { title, content } = request.body;
 
   Post.findById(request.params.id)
     .then((post) => {
       if (!post) return response.status(404).end();
 
+      post.title = title;
       post.content = content;
 
       return post.save().then((updatedPost) => {

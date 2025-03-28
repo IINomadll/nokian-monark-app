@@ -2,6 +2,7 @@ const config = require("./utils/config");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const loginRouter = require("./controllers/login");
 const postsRouter = require("./controllers/posts");
 const middleware = require("./utils/middleware");
 const mongoose = require("mongoose");
@@ -27,6 +28,7 @@ app.get("/", (request, response) => {
 });
 
 app.use("/api/posts", postsRouter);
+app.use("/api/login", loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.myErrorHandler);

@@ -12,11 +12,17 @@ const NavigationBar = () => {
         <Link to="/" style={padding}>
           Home
         </Link>
-        <Link to="/posts" style={padding}>
-          Posts
+        <Link to="/news" style={padding}>
+          News
         </Link>
-        <Link to="/about" style={padding}>
-          About
+        <Link to="/band" style={padding}>
+          Band
+        </Link>
+        <Link to="/music" style={padding}>
+          Music
+        </Link>
+        <Link to="/contact" style={padding}>
+          Contact
         </Link>
       </nav>
     </header>

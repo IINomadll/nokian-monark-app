@@ -6,8 +6,10 @@ import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
-import Posts from "./pages/Posts";
-import About from "./pages/About";
+import News from "./pages/News";
+import Band from "./pages/Band";
+import Contact from "./pages/Contact";
+import Music from "./pages/Music";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -27,15 +29,17 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<Posts posts={posts} />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/news" element={<News posts={posts} />} />
+        <Route path="/band" element={<Band />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/music" element={<Music />} />
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 };
 

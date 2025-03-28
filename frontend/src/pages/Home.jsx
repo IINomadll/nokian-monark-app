@@ -1,8 +1,12 @@
 const Home = () => {
   return (
-    <section>
+    <>
       <h1>Home view of Nøkian Monark web application</h1>
-    </section>
+
+      <section>
+        <p>Welcome to the main page of our site</p>
+      </section>
+    </>
   );
 };
 
