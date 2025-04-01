@@ -10,6 +10,7 @@ import News from "./pages/News";
 import Band from "./pages/Band";
 import Contact from "./pages/Contact";
 import Music from "./pages/Music";
+import Shop from "./pages/Shop";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/band" element={<Band />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/music" element={<Music />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
       <Footer />
     </>

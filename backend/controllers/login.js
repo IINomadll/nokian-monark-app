@@ -14,6 +14,7 @@ loginRouter.post("/", (request, response) => {
           .status(401) // unauthorized
           .json({ error: "invalid username or password" });
 
+      // 'return' ensures that the Promise from bcrypt.compare is returned to the outer .then() chain. This allows any errors occurring during the password comparison to be properly caught by the .catch() block at the end.
       return bcrypt
         .compare(password, user.passwordHash)
         .then((passwordCorrect) => {
@@ -27,7 +28,10 @@ loginRouter.post("/", (request, response) => {
             id: user._id,
           };
 
-          const token = jwt.sign(userForToken, config.SECRET);
+          // valid tokens can be generated only with the secret that is used in the digital signing. Token is set to expire in 120 * 60 seconds (two hours)
+          const token = jwt.sign(userForToken, config.SECRET, {
+            expiresIn: 120 * 60,
+          });
 
           response.status(200).send({ token, username: user.username });
         });

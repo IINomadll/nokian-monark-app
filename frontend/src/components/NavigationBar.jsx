@@ -15,11 +15,14 @@ const NavigationBar = () => {
         <Link to="/news" style={padding}>
           News
         </Link>
-        <Link to="/band" style={padding}>
-          Band
-        </Link>
         <Link to="/music" style={padding}>
           Music
+        </Link>
+        <Link to="/shop" style={padding}>
+          Shop
+        </Link>
+        <Link to="/band" style={padding}>
+          Band
         </Link>
         <Link to="/contact" style={padding}>
           Contact

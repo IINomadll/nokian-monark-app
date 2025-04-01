@@ -1,5 +1,12 @@
-const postsRouter = require("express").Router();
+const config = require("../utils/config");
+const jwt = require("jsonwebtoken");
 const Post = require("../models/post");
+const { tokenExtractor, authenticateUser } = require("../utils/middleware");
+
+const postsRouter = require("express").Router();
+
+// apply token extractor middleware to all requests
+postsRouter.use(tokenExtractor);
 
 postsRouter.get("/", (request, response) => {
   Post.find({}).then((posts) => {
@@ -16,7 +23,7 @@ postsRouter.get("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-postsRouter.post("/", (request, response, next) => {
+postsRouter.post("/", authenticateUser, (request, response, next) => {
   const body = request.body;
 
   const newPost = new Post({
@@ -27,9 +34,7 @@ postsRouter.post("/", (request, response, next) => {
 
   newPost
     .save()
-    .then((savedPost) => {
-      response.json(savedPost);
-    })
+    .then((savedPost) => response.json(savedPost))
     .catch((error) => next(error));
 });
 
