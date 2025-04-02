@@ -4,14 +4,15 @@ const app = express();
 const cors = require("cors");
 const loginRouter = require("./controllers/login");
 const postsRouter = require("./controllers/posts");
+const secretRouter = require("./controllers/secret");
 const middleware = require("./utils/middleware");
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
 
-console.log("connecting to", config.MONGODB_URI);
+console.log("connecting to", config.MONGODB_FREE_TIER_URI);
 mongoose
-  .connect(config.MONGODB_URI)
+  .connect(config.MONGODB_FREE_TIER_URI)
   .then(() => {
     console.log("connected to MongoDB");
   })
@@ -29,6 +30,7 @@ app.get("/", (request, response) => {
 
 app.use("/api/posts", postsRouter);
 app.use("/api/login", loginRouter);
+app.use("/api/secret", secretRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.myErrorHandler);

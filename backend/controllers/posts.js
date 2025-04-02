@@ -38,7 +38,7 @@ postsRouter.post("/", authenticateUser, (request, response, next) => {
     .catch((error) => next(error));
 });
 
-postsRouter.put("/:id", (request, response, next) => {
+postsRouter.put("/:id", authenticateUser, (request, response, next) => {
   const { title, content } = request.body;
 
   Post.findById(request.params.id)
@@ -55,7 +55,7 @@ postsRouter.put("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-postsRouter.delete("/:id", (request, response, next) => {
+postsRouter.delete("/:id", authenticateUser, (request, response, next) => {
   Post.findByIdAndDelete(request.params.id)
     .then((result) => response.status(204).end())
     .catch((error) => next(error));
