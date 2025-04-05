@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import postService from "./services/posts";
-import getSecret from "./services/secret";
 import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/Footer";
 
@@ -16,14 +15,14 @@ import Login from "./pages/Login";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [adminSecret, setAdminSecret] = useState(null);
+  const [adminAccess, setAdminAccess] = useState(false);
 
   useEffect(() => {
-    console.log("effect ran");
+    console.log("posts effect ran");
     postService
       .getAll()
       .then((response) => {
-        console.log("promise fulfilled");
+        console.log("posts promise fulfilled");
         setPosts(response.data);
       })
       .catch((error) => {
@@ -31,22 +30,6 @@ const App = () => {
         console.error("caught error:", error);
       });
   }, []);
-
-  useEffect(() => {
-    console.log("second effect ran");
-    getSecret()
-      .then((response) => {
-        console.log("second promise fulfilled");
-        setAdminSecret(response.data.secret);
-      })
-      .catch((error) => {
-        console.log("promise rejected");
-        console.error("caught error:", error);
-      });
-  }, []);
-
-  // app first renders "Loading...", and when the state changes (adminSecret arrives from backend) app re-renders and returns actual content
-  if (!adminSecret) return <div>Loading...</div>;
 
   return (
     <>
@@ -58,7 +41,12 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/music" element={<Music />} />
         <Route path="/shop" element={<Shop />} />
-        {adminSecret && <Route path={`/${adminSecret}`} element={<Login />} />}
+        <Route
+          path="/administrate/:uuid"
+          element={
+            <Login adminAccess={adminAccess} setAdminAccess={setAdminAccess} />
+          }
+        />
       </Routes>
       <Footer />
     </>

@@ -1,6 +1,8 @@
 import axios from "axios";
-const baseUrl = "/api/login";
+const baseUrl = "http://localhost:3001/api/login";
 
-const login = (credentials) => {};
+const login = (credentials) => {
+  return axios.post(baseUrl, credentials);
+};
 
-export default { login };
+export default login;
