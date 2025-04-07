@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import postService from "./services/posts";
-import NavigationBar from "./components/NavigationBar";
+import userService from "./utils/userService";
+
 import Footer from "./components/Footer";
+import NavigationBar from "./components/NavigationBar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import News from "./pages/News";
@@ -12,11 +15,14 @@ import Contact from "./pages/Contact";
 import Music from "./pages/Music";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
+import AdminPanel from "./pages/AdminPanel";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [adminAccess, setAdminAccess] = useState(false);
+  // const [adminAccess, setAdminAccess] = useState(false);
+  const [user, setUser] = useState(null);
 
+  // posts effect
   useEffect(() => {
     console.log("posts effect ran");
     postService
@@ -31,6 +37,16 @@ const App = () => {
       });
   }, []);
 
+  // session storage user effect
+  useEffect(() => {
+    const storedUser = userService.load();
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
+  // console.log("ADMIN ACCESS:", adminAccess);
+
   return (
     <>
       <NavigationBar />
@@ -43,8 +59,14 @@ const App = () => {
         <Route path="/shop" element={<Shop />} />
         <Route
           path="/administrate/:uuid"
+          element={<Login user={user} setUser={setUser} />}
+        />
+        <Route
+          path="/administrate/panel"
           element={
-            <Login adminAccess={adminAccess} setAdminAccess={setAdminAccess} />
+            <ProtectedRoute user={user}>
+              <AdminPanel user={user} />
+            </ProtectedRoute>
           }
         />
       </Routes>

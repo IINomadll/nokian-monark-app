@@ -3,92 +3,92 @@ import { useParams, Navigate } from "react-router-dom";
 
 import verifyUuid from "../services/admin";
 import login from "../services/login";
+import userService from "../utils/userService";
 
-const Login = ({ adminAccess, setAdminAccess }) => {
+const Login = ({ user, setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [uuidValid, setUuidValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { uuid } = useParams();
 
-  console.log(uuid);
-  console.log(adminAccess);
-
+  // effect for validating the UUID on component mount
   useEffect(() => {
-    console.log("login effect ran");
+    console.log("uuid effect ran");
     verifyUuid(uuid)
       .then((response) => {
-        console.log("login promise fulfilled");
-        console.log(response);
-        setIsLoading(false);
-        if (response.data.valid) setAdminAccess(true);
+        console.log("uuid promise fulfilled");
+        if (response.data.valid) setUuidValid(true);
       })
       .catch((error) => {
-        console.log("login promise rejected");
-        console.error(error);
+        console.log("uuid promise rejected");
+        console.error("Invalid UUID", error);
+      })
+      .finally(() => {
         setIsLoading(false);
       });
-  }, [uuid, setAdminAccess]);
+  }, [uuid]);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    console.log("logging in with", username, password);
-
     login({ username, password })
       .then((response) => {
-        console.log("RESPONSE", response);
-        console.log("DATA", response.data);
+        const adminUser = {
+          username: response.data.username,
+          token: response.data.token,
+        };
+        userService.save(adminUser);
+        setUser(adminUser);
         setUsername("");
         setPassword("");
-        setUser(response.data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error("Login failed", error));
   };
 
   if (isLoading) return <p>Loading...</p>;
-  else if (!isLoading && !adminAccess) return <Navigate to="/" />;
-  else if (!isLoading && !user) {
-    return (
-      <>
-        <h1>Login</h1>
-        <form onSubmit={handleLogin}>
-          <fieldset>
-            <legend>Login Info</legend>
-            <p>
-              <label htmlFor="userName">username:</label>
-              <input
-                type="text"
-                name="userName"
-                id="userName"
-                autoComplete="on"
-                required
-                value={username}
-                onChange={({ target }) => setUsername(target.value)}
-              />
-            </p>
-            <p>
-              <label htmlFor="password">password:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                required
-                value={password}
-                onChange={({ target }) => setPassword(target.value)}
-              />
-            </p>
-          </fieldset>
-          <button type="submit">Login</button>
-        </form>
-      </>
-    );
-  } else {
-    return (
-      <p>
-        <em>{user.username} logged in!</em>
-      </p>
-    );
+
+  // Redirect to home if uuid not correct
+  if (!uuidValid) return <Navigate to="/" replace />;
+
+  // Redirect to admin panel if user is already logged in
+  if (user && userService.exists()) {
+    return <Navigate to="/administrate/panel" />;
   }
+
+  return (
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <fieldset>
+          <legend>Login Info</legend>
+          <p>
+            <label htmlFor="userName">username:</label>
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              autoComplete="on"
+              required
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </p>
+          <p>
+            <label htmlFor="password">password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </p>
+        </fieldset>
+        <button type="submit">Login</button>
+      </form>
+    </>
+  );
 };
 
 export default Login;
