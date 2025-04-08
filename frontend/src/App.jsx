@@ -42,17 +42,22 @@ const App = () => {
     const storedUser = userService.load();
     if (storedUser) {
       setUser(storedUser);
+      // postService.setToken(storedUser.token);
     }
   }, []);
 
-  // console.log("ADMIN ACCESS:", adminAccess);
+  // sorts posts in descending order (newest first)
+  // while maintaining immutability of original posts array
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.created) - new Date(a.created)
+  );
 
   return (
     <>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/news" element={<News posts={posts} />} />
+        <Route path="/news" element={<News posts={sortedPosts} />} />
         <Route path="/band" element={<Band />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/music" element={<Music />} />
@@ -65,7 +70,12 @@ const App = () => {
           path="/administrate/panel"
           element={
             <ProtectedRoute user={user}>
-              <AdminPanel user={user} />
+              <AdminPanel
+                user={user}
+                setUser={setUser}
+                posts={sortedPosts}
+                setPosts={setPosts}
+              />
             </ProtectedRoute>
           }
         />

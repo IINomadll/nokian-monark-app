@@ -1,9 +1,41 @@
-import userService from "../utils/userService";
+import { useNavigate, Navigate } from "react-router-dom";
 
-const AdminPanel = ({ user }) => {
+import userService from "../utils/userService";
+import postService from "../services/posts";
+import NewsForm from "../components/NewsForm";
+
+const AdminPanel = ({ user, setUser, posts, setPosts }) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     userService.remove();
-    window.location.href = "/";
+    setUser(null);
+    console.log("admin logged out");
+    navigate("/");
+  };
+
+  const handleEdit = () => {
+    console.log("implement editing a post as a next step!");
+  };
+
+  const handleDelete = (post) => {
+    const choice = window.confirm(
+      `Are your sure you want to delete post titled: ${post.title}?`
+    );
+    if (choice) {
+      postService.setToken(user.token);
+      postService
+        .eradicate(post.id)
+        .then((response) => {
+          console.log(response);
+          setPosts(posts.filter((p) => p.id !== post.id));
+        })
+        .catch((error) =>
+          console.error("error occured while deleting the post", error)
+        );
+    } else {
+      console.log("delete action cancelled");
+    }
   };
 
   if (!user) {
@@ -19,6 +51,21 @@ const AdminPanel = ({ user }) => {
           Logged in as <strong>{user.username}</strong>
         </p>
         <button onClick={handleLogout}>Logout</button>
+        <hr />
+        <section>
+          <h2>Band news posts</h2>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+                <button onClick={handleEdit}>Edit</button>
+                <button onClick={() => handleDelete(post)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+          <NewsForm user={user} posts={posts} setPosts={setPosts} />
+        </section>
       </section>
     </>
   );
