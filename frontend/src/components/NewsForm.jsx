@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import postService from "../services/posts";
 
-const NewsForm = ({ user, posts, setPosts }) => {
+const NewsForm = ({ posts, setPosts }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -12,7 +14,6 @@ const NewsForm = ({ user, posts, setPosts }) => {
       title,
       content,
     };
-    postService.setToken(user.token);
     postService
       .create(postObj)
       .then((response) => {
@@ -20,15 +21,41 @@ const NewsForm = ({ user, posts, setPosts }) => {
         setPosts(posts.concat(response.data));
         setTitle("");
         setContent("");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        toast.success("News post added!", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+        });
       })
-      .catch((error) => console.error("Adding post failed", error));
+      .catch((error) => {
+        console.error("adding post failed", error);
+        toast.error("Adding post failed!", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+        });
+      });
   };
 
   return (
     <>
       <form onSubmit={handleAddPost}>
         <fieldset>
-          <legend>Create new post</legend>
+          <legend>Create a news post</legend>
           <p>
             <label htmlFor="title">Post title:</label>
             <br />
@@ -42,7 +69,7 @@ const NewsForm = ({ user, posts, setPosts }) => {
             />
           </p>
           <p>
-            <label htmlFor="content">Post text content:</label>
+            <label htmlFor="content">Post content:</label>
             <br />
             <textarea
               type="text"

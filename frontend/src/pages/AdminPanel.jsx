@@ -1,41 +1,26 @@
 import { useNavigate, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import userService from "../utils/userService";
 import postService from "../services/posts";
 import NewsForm from "../components/NewsForm";
+import NewsPost from "../components/NewsPost";
 
 const AdminPanel = ({ user, setUser, posts, setPosts }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("AdminPanel token effect ran");
+    postService.setToken(user.token);
+  }, [user]);
 
   const handleLogout = () => {
     userService.remove();
     setUser(null);
     console.log("admin logged out");
     navigate("/");
-  };
-
-  const handleEdit = () => {
-    console.log("implement editing a post as a next step!");
-  };
-
-  const handleDelete = (post) => {
-    const choice = window.confirm(
-      `Are your sure you want to delete post titled: ${post.title}?`
-    );
-    if (choice) {
-      postService.setToken(user.token);
-      postService
-        .eradicate(post.id)
-        .then((response) => {
-          console.log(response);
-          setPosts(posts.filter((p) => p.id !== post.id));
-        })
-        .catch((error) =>
-          console.error("error occured while deleting the post", error)
-        );
-    } else {
-      console.log("delete action cancelled");
-    }
+    toast.info("Logged out!");
   };
 
   if (!user) {
@@ -56,15 +41,15 @@ const AdminPanel = ({ user, setUser, posts, setPosts }) => {
           <h2>Band news posts</h2>
           <ul>
             {posts.map((post) => (
-              <li key={post.id}>
-                <h3>{post.title}</h3>
-                <p>{post.content}</p>
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={() => handleDelete(post)}>Delete</button>
-              </li>
+              <NewsPost
+                key={post.id}
+                post={post}
+                posts={posts}
+                setPosts={setPosts}
+              />
             ))}
           </ul>
-          <NewsForm user={user} posts={posts} setPosts={setPosts} />
+          <NewsForm posts={posts} setPosts={setPosts} />
         </section>
       </section>
     </>

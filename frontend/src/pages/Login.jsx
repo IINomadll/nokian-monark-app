@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import verifyUuid from "../services/admin";
 import login from "../services/login";
@@ -18,11 +19,15 @@ const Login = ({ user, setUser }) => {
     verifyUuid(uuid)
       .then((response) => {
         console.log("uuid promise fulfilled");
-        if (response.data.valid) setUuidValid(true);
+        if (response.data.valid) {
+          setUuidValid(true);
+          toast.success("UUID valid, access granted!");
+        }
       })
       .catch((error) => {
         console.log("uuid promise rejected");
         console.error("Invalid UUID", error);
+        toast.warning("UUID invalid, access denied!");
       })
       .finally(() => {
         setIsLoading(false);
@@ -41,8 +46,14 @@ const Login = ({ user, setUser }) => {
         setUser(adminUser);
         setUsername("");
         setPassword("");
+        toast.success(`Logged in as ${adminUser.username}!`);
       })
-      .catch((error) => console.error("Login failed", error));
+      .catch((error) => {
+        console.error("Login failed", error);
+        setUsername("");
+        setPassword("");
+        toast.error("Login failed, check credentials!");
+      });
   };
 
   if (isLoading) return <p>Loading...</p>;

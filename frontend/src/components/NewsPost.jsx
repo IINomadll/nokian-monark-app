@@ -1,0 +1,68 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+import postService from "../services/posts";
+import EditPostForm from "./EditPostForm";
+
+const NewsPost = ({ post, posts, setPosts }) => {
+  const [editing, setEditing] = useState(false);
+
+  const handleUpdate = (updatedPost) => {
+    postService
+      .update(post.id, updatedPost)
+      .then((response) => {
+        const updatedPosts = posts.map((p) =>
+          p.id !== post.id ? p : response.data
+        );
+        setPosts(updatedPosts);
+        toast.success("Post updated successfully!");
+        setEditing(false);
+      })
+      .catch((error) => {
+        console.error("update failed", error);
+        toast.error("Update failed!");
+      });
+  };
+
+  const handleDelete = () => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to permanently delete: "${post.title}"?`
+    );
+    if (!confirmDelete) {
+      console.log("delete action cancelled");
+      toast.info("Delete operation cancelled!");
+      return;
+    }
+
+    postService
+      .eradicate(post.id)
+      .then(() => {
+        setPosts(posts.filter((p) => p.id !== post.id));
+        toast.success("Post deleted.");
+      })
+      .catch((error) => {
+        console.error("Delete failed", error);
+        toast.error("Delete failed!");
+      });
+  };
+
+  return (
+    <li>
+      {editing ? (
+        <EditPostForm
+          post={post}
+          onUpdate={handleUpdate}
+          onCancel={() => setEditing(false)}
+        />
+      ) : (
+        <>
+          <h3>{post.title}</h3>
+          <p>{post.content}</p>
+          <button onClick={() => setEditing(true)}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
+        </>
+      )}
+    </li>
+  );
+};
+
+export default NewsPost;

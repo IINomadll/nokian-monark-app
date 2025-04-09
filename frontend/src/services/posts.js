@@ -9,8 +9,6 @@ const setToken = (newToken) => {
 
 const getAll = () => axios.get(baseUrl);
 
-// const getById = (id) => axios.get(`${baseUrl}/${id}`);
-
 const create = (postObject) => {
   const config = {
     headers: { Authorization: token },
@@ -19,7 +17,10 @@ const create = (postObject) => {
 };
 
 const update = (id, postObject) => {
-  return axios.put(`${baseUrl}/${id}`, postObject);
+  const config = {
+    headers: { Authorization: token },
+  };
+  return axios.put(`${baseUrl}/${id}`, postObject, config);
 };
 
 const eradicate = (id) => {

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import postService from "./services/posts";
 import userService from "./utils/userService";
@@ -32,7 +34,7 @@ const App = () => {
         setPosts(response.data);
       })
       .catch((error) => {
-        console.log("promise rejected");
+        console.log("posts promise rejected");
         console.error("caught error:", error);
       });
   }, []);
@@ -42,7 +44,6 @@ const App = () => {
     const storedUser = userService.load();
     if (storedUser) {
       setUser(storedUser);
-      // postService.setToken(storedUser.token);
     }
   }, []);
 
@@ -80,6 +81,19 @@ const App = () => {
           }
         />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Flip}
+      />
       <Footer />
     </>
   );
