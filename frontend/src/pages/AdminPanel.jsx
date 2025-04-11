@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 
 import userService from "../utils/userService";
 import postService from "../services/posts";
-import NewsForm from "../components/NewsForm";
-import NewsPost from "../components/NewsPost";
+import PostForm from "../components/PostForm";
+import Post from "../components/Post";
+import BackToTopButton from "../components/BackToTopButton";
 
 const AdminPanel = ({ user, setUser, posts, setPosts }) => {
   const navigate = useNavigate();
@@ -30,18 +31,20 @@ const AdminPanel = ({ user, setUser, posts, setPosts }) => {
 
   return (
     <>
-      <h1>Admin panel</h1>
-      <section>
-        <p>
-          Logged in as <strong>{user.username}</strong>
-        </p>
-        <button onClick={handleLogout}>Logout</button>
-        <hr />
+      <article id="adminPanel">
+        <h1>Admin panel</h1>
         <section>
-          <h2>Band news posts</h2>
+          <p>
+            Logged in as <strong>{user.username}</strong>
+          </p>
+          <button onClick={handleLogout}>Logout</button>
+        </section>
+        <hr />
+        <article id="posts">
+          <h2>Manage news posts</h2>
           <ul>
             {posts.map((post) => (
-              <NewsPost
+              <Post
                 key={post.id}
                 post={post}
                 posts={posts}
@@ -49,9 +52,16 @@ const AdminPanel = ({ user, setUser, posts, setPosts }) => {
               />
             ))}
           </ul>
-          <NewsForm posts={posts} setPosts={setPosts} />
-        </section>
-      </section>
+          <PostForm posts={posts} setPosts={setPosts} />
+        </article>
+        <br />
+        <hr />
+        <article id="shopInventory">
+          <h2>Manage shop inventory</h2>
+        </article>
+        <br />
+        <BackToTopButton />
+      </article>
     </>
   );
 };

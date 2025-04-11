@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import postService from "../services/posts";
 import EditPostForm from "./EditPostForm";
 
-const NewsPost = ({ post, posts, setPosts }) => {
+const Post = ({ post, posts, setPosts }) => {
   const [editing, setEditing] = useState(false);
 
   const handleUpdate = (updatedPost) => {
@@ -14,12 +14,12 @@ const NewsPost = ({ post, posts, setPosts }) => {
           p.id !== post.id ? p : response.data
         );
         setPosts(updatedPosts);
-        toast.success("Post updated successfully!");
+        toast.success("Post updated!");
         setEditing(false);
       })
       .catch((error) => {
         console.error("update failed", error);
-        toast.error("Update failed!");
+        toast.error("Update operation failed!");
       });
   };
 
@@ -37,11 +37,11 @@ const NewsPost = ({ post, posts, setPosts }) => {
       .eradicate(post.id)
       .then(() => {
         setPosts(posts.filter((p) => p.id !== post.id));
-        toast.success("Post deleted.");
+        toast.success("Post deleted!");
       })
       .catch((error) => {
         console.error("Delete failed", error);
-        toast.error("Delete failed!");
+        toast.error("Delete operation failed!");
       });
   };
 
@@ -65,4 +65,4 @@ const NewsPost = ({ post, posts, setPosts }) => {
   );
 };
 
-export default NewsPost;
+export default Post;

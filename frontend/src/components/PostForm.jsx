@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { toast, Flip } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import postService from "../services/posts";
 
-const NewsForm = ({ posts, setPosts }) => {
+const PostForm = ({ posts, setPosts }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -22,32 +22,11 @@ const NewsForm = ({ posts, setPosts }) => {
         setTitle("");
         setContent("");
         window.scrollTo({ top: 0, behavior: "smooth" });
-
-        toast.success("News post added!", {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Flip,
-        });
+        toast.success("Post created!");
       })
       .catch((error) => {
         console.error("adding post failed", error);
-        toast.error("Adding post failed!", {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Flip,
-        });
+        toast.error("Post creation failed!");
       });
   };
 
@@ -89,4 +68,4 @@ const NewsForm = ({ posts, setPosts }) => {
   );
 };
 
-export default NewsForm;
+export default PostForm;

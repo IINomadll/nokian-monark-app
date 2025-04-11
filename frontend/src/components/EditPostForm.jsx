@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const EditPostForm = ({ post, onUpdate, onCancel }) => {
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
+
+  // side effect for closing the edit form with "Esc"
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      if (event.key === "Escape") onCancel();
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      // clean up on component unmount
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [onCancel]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
