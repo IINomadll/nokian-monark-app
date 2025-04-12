@@ -22,18 +22,6 @@ const tokenExtractor = (request, response, next) => {
   next(); // pass request to the next middleware
 };
 
-// const tokenExtractor = (request, response, next) => {
-//   const authorization = request.get("authorization");
-
-//   if (authorization && authorization.startsWith("Bearer ")) {
-//     request.token = authorization.replace("Bearer ", "");
-//   } else {
-//     request.token = null;
-//   }
-
-//   next();
-// };
-
 const authenticateUser = (request, response, next) => {
   const decodedToken = jwt.verify(request.token, config.SECRET);
 

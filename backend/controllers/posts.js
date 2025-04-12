@@ -1,5 +1,3 @@
-const config = require("../utils/config");
-const jwt = require("jsonwebtoken");
 const Post = require("../models/post");
 const { tokenExtractor, authenticateUser } = require("../utils/middleware");
 
@@ -43,6 +41,7 @@ postsRouter.put("/:id", authenticateUser, (request, response, next) => {
 
   Post.findById(request.params.id)
     .then((post) => {
+      // check needed because .then block runs even if post not found
       if (!post) return response.status(404).end();
 
       post.title = title;
