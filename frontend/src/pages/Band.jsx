@@ -1,4 +1,4 @@
-import bandImg from "../assets/images/band-promo-1920x1080.png";
+// import bandImg from "../assets/images/band-promo-1920x1080.png";
 
 const Band = () => {
   return (
@@ -6,7 +6,12 @@ const Band = () => {
       <h1>Nøkian Monark</h1>
       <article>
         <figure>
-          <img src={bandImg} alt="Band photo" width={1920} height={1080} />
+          <img
+            src="/images/band-promo-1920x1080.png"
+            alt="Band photo"
+            width={1920}
+            height={1080}
+          />
           <figcaption>
             Lassi Lehtinen, Tatu Kekkonen, Manu Lehtinen, Waltteri Lehtinen,
             Taneli Törölä

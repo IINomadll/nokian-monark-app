@@ -1,4 +1,4 @@
-import OTTDU_cover from "../assets/images/OTTDU-album-cover-1200x1200.jpg";
+// import OTTDU_cover from "../assets/images/OTTDU-album-cover-1200x1200.jpg";
 import BackToTopButton from "../components/BackToTopButton";
 
 const Music = () => {
@@ -47,7 +47,7 @@ const Music = () => {
           <h3>Of Things That Define Us</h3>
           <figure>
             <img
-              src={OTTDU_cover}
+              src="/images/OTTDU-album-cover-1200x1200.jpg"
               alt="Of Things That Define Us - EP cover photo"
               width={1200}
               height={1200}
