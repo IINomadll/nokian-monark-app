@@ -31,8 +31,8 @@ const AdminPanel = ({ user, setUser, posts, setPosts }) => {
 
   return (
     <>
+      <h1>Admin panel</h1>
       <article id="adminPanel">
-        <h1>Admin panel</h1>
         <section>
           <p>
             Logged in as <strong>{user.username}</strong>

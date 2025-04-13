@@ -21,7 +21,6 @@ import AdminPanel from "./pages/AdminPanel";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  // const [adminAccess, setAdminAccess] = useState(false);
   const [user, setUser] = useState(null);
 
   // posts effect
@@ -50,7 +49,7 @@ const App = () => {
   // sorts posts in descending order (newest first)
   // while maintaining immutability of original posts array
   const sortedPosts = [...posts].sort(
-    (a, b) => new Date(b.created) - new Date(a.created)
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
   return (

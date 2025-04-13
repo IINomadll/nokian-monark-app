@@ -31,6 +31,7 @@ productsRouter.post("/", authenticateUser, (request, response, next) => {
     available: body.available,
     material: body.material || undefined,
     sizes: body.sizes || undefined,
+    quantity: body.quantity || undefined,
   });
 
   newProduct
@@ -49,6 +50,7 @@ productsRouter.put("/:id", authenticateUser, (request, response, next) => {
     sizes,
     price,
     available,
+    quantity,
   } = request.body;
 
   Product.findById(request.params.id)
@@ -65,6 +67,7 @@ productsRouter.put("/:id", authenticateUser, (request, response, next) => {
       if (sizes !== undefined) product.sizes = sizes;
       if (price !== undefined) product.price = price;
       if (available !== undefined) product.available = available;
+      if (quantity !== undefined) product.quantity = quantity;
 
       return product.save().then((updatedProduct) => {
         response.json(updatedProduct);

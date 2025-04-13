@@ -27,7 +27,7 @@ postsRouter.post("/", authenticateUser, (request, response, next) => {
   const newPost = new Post({
     title: body.title,
     content: body.content,
-    created: Date.now(),
+    // created: Date.now(),
   });
 
   newPost

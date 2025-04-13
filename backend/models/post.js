@@ -1,21 +1,25 @@
 const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    minlength: 3,
+// created: {
+//   type: Date,
+//   required: true,
+// }
+
+const postSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Post title is required"],
+      minlength: 3,
+    },
+    content: {
+      type: String,
+      required: [true, "Post content is required"],
+      minlength: 3,
+    },
   },
-  content: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  created: {
-    type: Date,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 postSchema.set("toJSON", {
   transform: (document, returnedObject) => {
