@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { ToastContainer, Flip } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import postService from "./services/posts";
+import productService from "./services/products";
 import userService from "./utils/userService";
 
 import Footer from "./components/Footer";
@@ -21,6 +22,7 @@ import AdminPanel from "./pages/AdminPanel";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
 
   // posts effect
@@ -34,6 +36,21 @@ const App = () => {
       })
       .catch((error) => {
         console.log("posts promise rejected");
+        console.error("caught error:", error);
+      });
+  }, []);
+
+  // products effect
+  useEffect(() => {
+    console.log("products effect ran");
+    productService
+      .getAll()
+      .then((response) => {
+        console.log("products promise fulfilled");
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.log("products promise rejected");
         console.error("caught error:", error);
       });
   }, []);
@@ -75,6 +92,8 @@ const App = () => {
                 setUser={setUser}
                 posts={sortedPosts}
                 setPosts={setPosts}
+                products={products}
+                setProducts={setProducts}
               />
             </ProtectedRoute>
           }
@@ -91,7 +110,7 @@ const App = () => {
         draggable
         pauseOnHover
         theme="colored"
-        transition={Flip}
+        transition={Slide}
       />
       <Footer />
     </>

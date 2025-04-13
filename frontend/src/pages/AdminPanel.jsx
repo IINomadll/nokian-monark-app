@@ -3,17 +3,25 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 import userService from "../utils/userService";
-import postService from "../services/posts";
+import tokenService from "../services/token";
 import PostForm from "../components/PostForm";
 import Post from "../components/Post";
+import Product from "../components/Product";
 import BackToTopButton from "../components/BackToTopButton";
 
-const AdminPanel = ({ user, setUser, posts, setPosts }) => {
+const AdminPanel = ({
+  user,
+  setUser,
+  posts,
+  setPosts,
+  products,
+  setProducts,
+}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("AdminPanel token effect ran");
-    postService.setToken(user.token);
+    tokenService.setToken(user.token);
   }, [user]);
 
   const handleLogout = () => {
@@ -58,6 +66,16 @@ const AdminPanel = ({ user, setUser, posts, setPosts }) => {
         <hr />
         <article id="shopInventory">
           <h2>Manage shop inventory</h2>
+          <ul>
+            {products.map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                products={products}
+                setProducts={setProducts}
+              />
+            ))}
+          </ul>
         </article>
         <br />
         <BackToTopButton />

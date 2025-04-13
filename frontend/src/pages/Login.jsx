@@ -26,7 +26,7 @@ const Login = ({ user, setUser }) => {
       })
       .catch((error) => {
         console.log("uuid promise rejected");
-        console.error("Invalid UUID", error);
+        console.error("invalid UUID", error);
         toast.warning("UUID invalid, access denied!");
       })
       .finally(() => {
