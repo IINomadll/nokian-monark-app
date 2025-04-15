@@ -11,8 +11,8 @@ import Footer from "./components/Footer";
 import NavigationBar from "./components/NavigationBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// import News from "./pages/News";
 import Home from "./pages/Home";
-import News from "./pages/News";
 import Band from "./pages/Band";
 import Contact from "./pages/Contact";
 import Music from "./pages/Music";
@@ -73,8 +73,8 @@ const App = () => {
     <>
       <NavigationBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/news" element={<News posts={sortedPosts} />} />
+        <Route path="/" element={<Home posts={sortedPosts} />} />
+        {/* <Route path="/news" element={<News posts={sortedPosts} />} /> */}
         <Route path="/band" element={<Band />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/music" element={<Music />} />
@@ -101,7 +101,7 @@ const App = () => {
       </Routes>
       <ToastContainer
         position="top-right"
-        autoClose={4000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}

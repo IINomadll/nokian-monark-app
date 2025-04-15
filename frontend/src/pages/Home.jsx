@@ -1,12 +1,28 @@
-const Home = () => {
-  return (
-    <>
-      <h1>Home view of Nøkian Monark web application</h1>
+import BackToTopButton from "../components/BackToTopButton";
 
-      <section>
-        <p>Welcome to the main page of our site</p>
+const Home = ({ posts }) => {
+  return (
+    <article className="home">
+      <header>
+        <h1>Nøkian Monark App</h1>
+        <p>Welcome to the main page</p>
+      </header>
+
+      <section aria-labelledby="news-posts">
+        <h2 id="news-posts">Band news</h2>
+        <ol>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <article>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+              </article>
+            </li>
+          ))}
+        </ol>
       </section>
-    </>
+      <BackToTopButton />
+    </article>
   );
 };
 

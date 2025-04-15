@@ -1,24 +1,26 @@
-// import bandImg from "../assets/images/band-promo-1920x1080.png";
-
 const Band = () => {
   return (
-    <>
-      <h1>Nøkian Monark</h1>
-      <article>
-        <figure>
-          <img
-            src="/images/band-promo-1920x1080.png"
-            alt="Band photo"
-            width={1920}
-            height={1080}
-          />
-          <figcaption>
-            Lassi Lehtinen, Tatu Kekkonen, Manu Lehtinen, Waltteri Lehtinen,
-            Taneli Törölä
-          </figcaption>
-        </figure>
+    <article className="band-bio">
+      <header>
+        <h1>Nøkian Monark</h1>
+      </header>
 
-        <h2>Biography</h2>
+      <figure>
+        <img
+          src="/images/band-promo-1920x1080.png"
+          alt="Promotional band photo of Nøkian Monark"
+          width={1920}
+          height={1080}
+          style={{ width: "50rem", height: "28.125rem" }}
+        />
+        <figcaption>
+          Lassi Lehtinen, Tatu Kekkonen, Manu Lehtinen, Waltteri Lehtinen,
+          Taneli Törölä
+        </figcaption>
+      </figure>
+
+      <section aria-labelledby="biography-heading">
+        <h2 id="biography-heading">Biography</h2>
 
         <p>
           Nøkian Monark is a Finnish metal band formed in 2020. Their musical
@@ -51,8 +53,10 @@ const Band = () => {
           Nøkian Monark is also heading for some live performances, so stay
           tuned for more news!
         </p>
+      </section>
 
-        <h2>Members:</h2>
+      <section aria-labelledby="members">
+        <h2 id="members">Members:</h2>
 
         <ul>
           <li>Manu Lehtinen - vocals</li>
@@ -67,13 +71,8 @@ const Band = () => {
           </li>
           <li>Waltteri Lehtinen - drums</li>
         </ul>
-
-        {/* <blockquote>
-          "Lorem ipsum dolor sit amet..." – Cicero,{" "}
-          <cite>de Finibus Bonorum et Malorum</cite>
-        </blockquote> */}
-      </article>
-    </>
+      </section>
+    </article>
   );
 };
 

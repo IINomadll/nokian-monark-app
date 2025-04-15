@@ -1,17 +1,25 @@
-// import OTTDU_cover from "../assets/images/OTTDU-album-cover-1200x1200.jpg";
 import BackToTopButton from "../components/BackToTopButton";
 
 const Music = () => {
   return (
-    <>
-      <h1>Music</h1>
-      <article>
+    <article className="music">
+      <header>
+        <h1>Music</h1>
         <p>Music releases and embeddings will be on this page</p>
-        <section id="musicVideos">
+      </header>
+
+      <section className="music-videos">
+        <header>
           <h2>Music Videos</h2>
           <p>Here you will find our music videos</p>
-          <div>
-            <h3>The Writer's Block</h3>
+        </header>
+
+        <section>
+          <h3>The Writer's Block</h3>
+          <figure>
+            <figcaption className="visually-hidden">
+              YouTube embed of The Writer's Block music video
+            </figcaption>
             <iframe
               width="560"
               height="315"
@@ -22,9 +30,15 @@ const Music = () => {
               allowFullScreen
               loading="lazy"
             ></iframe>
-          </div>
-          <div>
-            <h3>Shadowman</h3>
+          </figure>
+        </section>
+
+        <section>
+          <h3>Shadowman</h3>
+          <figure>
+            <figcaption className="visually-hidden">
+              YouTube embed of Shadowman music video
+            </figcaption>
             <iframe
               width="560"
               height="315"
@@ -35,27 +49,41 @@ const Music = () => {
               allowFullScreen
               loading="lazy"
             ></iframe>
-          </div>
+          </figure>
         </section>
-        <section id="releases">
+      </section>
+
+      <section className="releases">
+        <header>
           <h2>Releases</h2>
           <p>
             Here you will find pictures of our releases and related info like
             songs, release date etc.
           </p>
-          <h2>EPs</h2>
+        </header>
+
+        <h2>EPs</h2>
+
+        <section>
           <h3>Of Things That Define Us</h3>
+
           <figure>
             <img
               src="/images/OTTDU-album-cover-1200x1200.jpg"
               alt="Of Things That Define Us - EP cover photo"
               width={1200}
               height={1200}
+              style={{ width: "40rem", height: "40rem" }}
             />
-            <figcaption>EP cover photo</figcaption>
+            <figcaption>
+              <em>Of Things That Define Us</em> album cover
+            </figcaption>
           </figure>
-          <div>
-            <h3>Of Things That Define us - Spotify</h3>
+
+          <figure>
+            <figcaption className="visually-hidden">
+              Spotify embed of the EP "Of Things That Define Us"
+            </figcaption>
             <iframe
               src="https://open.spotify.com/embed/album/7uKRQa6MukvdtPFInDxq3q?utm_source=generator"
               width="100%"
@@ -65,9 +93,12 @@ const Music = () => {
               style={{ borderRadius: "12px" }}
               allowFullScreen
             ></iframe>
-          </div>
-          <div>
-            <h3>Of Things That Define Us - Bandcamp</h3>
+          </figure>
+
+          <figure>
+            <figcaption className="visually-hidden">
+              Bandcamp embed of the EP "Of Things That Define Us"
+            </figcaption>
             <iframe
               style={{ border: 0, width: 400, height: 340 }}
               src="https://bandcamp.com/EmbeddedPlayer/album=1554536734/size=large/bgcol=333333/linkcol=e99708/artwork=small/transparent=true/"
@@ -77,11 +108,14 @@ const Music = () => {
                 Of Things That Define Us by Nøkian Monark
               </a>
             </iframe>
-          </div>
+          </figure>
         </section>
-      </article>
-      <BackToTopButton />
-    </>
+      </section>
+
+      <footer>
+        <BackToTopButton />
+      </footer>
+    </article>
   );
 };
 

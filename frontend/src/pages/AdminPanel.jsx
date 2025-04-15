@@ -65,7 +65,7 @@ const AdminPanel = ({
         <br />
         <hr />
         <article id="shopInventory">
-          <h2>Manage shop inventory</h2>
+          <h2>Manage products</h2>
           <ul>
             {products.map((product) => (
               <Product

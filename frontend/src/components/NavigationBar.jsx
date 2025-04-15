@@ -12,9 +12,9 @@ const NavigationBar = () => {
         <Link to="/" style={padding}>
           Home
         </Link>
-        <Link to="/news" style={padding}>
+        {/* <Link to="/news" style={padding}>
           News
-        </Link>
+        </Link> */}
         <Link to="/music" style={padding}>
           Music
         </Link>

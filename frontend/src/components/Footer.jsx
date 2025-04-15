@@ -4,7 +4,9 @@ const Footer = () => {
   return (
     <footer>
       <hr />
-      <em>&copy; Nøkian Monark {year}</em>
+      <p>
+        <em>&copy; Nøkian Monark {year}</em>
+      </p>
     </footer>
   );
 };

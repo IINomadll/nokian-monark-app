@@ -6,7 +6,7 @@ const Contact = () => {
     <>
       <h1>Contact Nøkian Monark</h1>
       <section>
-        <h2>Have questions? Order trouble?</h2>
+        <h2>Have questions? Trouble with order?</h2>
         <form
           action="https://formsubmit.co/f1e162fa6dfd591946abce635893fc07"
           method="POST"
@@ -39,7 +39,7 @@ const Contact = () => {
           </fieldset>
         </form>
       </section>
-      <section>
+      <section style={{ backgroundColor: "grey" }}>
         <figure>
           <a
             href="https://www.youtube.com/@nkianmonark9614"
@@ -51,6 +51,7 @@ const Contact = () => {
               alt="Monochrome dark YouTube -logo"
               width={734}
               height={518}
+              style={{ width: "5rem", height: "3.53rem", margin: "1rem" }}
             />
           </a>
         </figure>
@@ -65,6 +66,7 @@ const Contact = () => {
               alt="Monochrome white Facebook -logo"
               width={2084}
               height={2084}
+              style={{ width: "5rem", height: "5rem", margin: "1rem" }}
             />
           </a>
         </figure>
