@@ -1,6 +1,6 @@
 const Shop = () => {
   return (
-    <article className="shop">
+    <article className="shop-page">
       <header>
         <h1>Shop</h1>
       </header>

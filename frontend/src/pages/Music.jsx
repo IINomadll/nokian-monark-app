@@ -2,13 +2,13 @@ import BackToTopButton from "../components/BackToTopButton";
 
 const Music = () => {
   return (
-    <article className="music">
+    <article className="music-page">
       <header>
         <h1>Music</h1>
         <p>Music releases and embeddings will be on this page</p>
       </header>
 
-      <section className="music-videos">
+      <section>
         <header>
           <h2>Music Videos</h2>
           <p>Here you will find our music videos</p>
@@ -53,7 +53,7 @@ const Music = () => {
         </section>
       </section>
 
-      <section className="releases">
+      <section>
         <header>
           <h2>Releases</h2>
           <p>

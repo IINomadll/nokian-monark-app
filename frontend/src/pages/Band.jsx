@@ -1,6 +1,6 @@
 const Band = () => {
   return (
-    <article className="band-bio">
+    <article className="band-page">
       <header>
         <h1>Nøkian Monark</h1>
       </header>
@@ -19,8 +19,8 @@ const Band = () => {
         </figcaption>
       </figure>
 
-      <section aria-labelledby="biography-heading">
-        <h2 id="biography-heading">Biography</h2>
+      <section>
+        <h2>Biography</h2>
 
         <p>
           Nøkian Monark is a Finnish metal band formed in 2020. Their musical
@@ -55,8 +55,8 @@ const Band = () => {
         </p>
       </section>
 
-      <section aria-labelledby="members">
-        <h2 id="members">Members:</h2>
+      <section>
+        <h2>Members:</h2>
 
         <ul>
           <li>Manu Lehtinen - vocals</li>

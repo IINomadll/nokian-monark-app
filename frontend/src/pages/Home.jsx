@@ -2,14 +2,14 @@ import BackToTopButton from "../components/BackToTopButton";
 
 const Home = ({ posts }) => {
   return (
-    <article className="home">
+    <article className="home-page">
       <header>
         <h1>Nøkian Monark App</h1>
         <p>Welcome to the main page</p>
       </header>
 
-      <section aria-labelledby="news-posts">
-        <h2 id="news-posts">Band news</h2>
+      <section>
+        <h2>Band news</h2>
         <ol>
           {posts.map((post) => (
             <li key={post.id}>
@@ -21,7 +21,10 @@ const Home = ({ posts }) => {
           ))}
         </ol>
       </section>
-      <BackToTopButton />
+
+      <footer>
+        <BackToTopButton />
+      </footer>
     </article>
   );
 };

@@ -31,11 +31,14 @@ const PostForm = ({ posts, setPosts }) => {
   };
 
   return (
-    <>
+    <section aria-labelledby="create-post-heading">
+      <h3 id="create-post-heading">Create news post</h3>
+
       <form onSubmit={handleAddPost}>
         <fieldset>
-          <legend>Create a news post</legend>
-          <p>
+          <legend className="visually-hidden">Create a news post</legend>
+
+          <div className="form-field">
             <label htmlFor="title">Post title:</label>
             <br />
             <input
@@ -46,8 +49,9 @@ const PostForm = ({ posts, setPosts }) => {
               value={title}
               onChange={({ target }) => setTitle(target.value)}
             />
-          </p>
-          <p>
+          </div>
+
+          <div className="form-field">
             <label htmlFor="content">Post content:</label>
             <br />
             <textarea
@@ -60,11 +64,14 @@ const PostForm = ({ posts, setPosts }) => {
               value={content}
               onChange={({ target }) => setContent(target.value)}
             />
-          </p>
-          <button type="submit">Create post</button>
+          </div>
         </fieldset>
+
+        <div className="form-actions">
+          <button type="submit">Create post</button>
+        </div>
       </form>
-    </>
+    </section>
   );
 };
 

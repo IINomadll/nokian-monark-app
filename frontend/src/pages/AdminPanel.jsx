@@ -39,18 +39,21 @@ const AdminPanel = ({
 
   return (
     <>
-      <h1>Admin panel</h1>
-      <article id="adminPanel">
-        <section>
+      <header>
+        <h1>Admin panel</h1>
+        <div>
           <p>
             Logged in as <strong>{user.username}</strong>
           </p>
           <button onClick={handleLogout}>Logout</button>
-        </section>
-        <hr />
-        <article id="posts">
+        </div>
+      </header>
+
+      {/* main content of page starts here */}
+      <main>
+        <section>
           <h2>Manage news posts</h2>
-          <ul>
+          <ol>
             {posts.map((post) => (
               <Post
                 key={post.id}
@@ -59,12 +62,11 @@ const AdminPanel = ({
                 setPosts={setPosts}
               />
             ))}
-          </ul>
+          </ol>
           <PostForm posts={posts} setPosts={setPosts} />
-        </article>
-        <br />
-        <hr />
-        <article id="shopInventory">
+        </section>
+
+        <section>
           <h2>Manage products</h2>
           <ul>
             {products.map((product) => (
@@ -76,10 +78,12 @@ const AdminPanel = ({
               />
             ))}
           </ul>
-        </article>
-        <br />
+        </section>
+      </main>
+
+      <footer>
         <BackToTopButton />
-      </article>
+      </footer>
     </>
   );
 };

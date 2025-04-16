@@ -3,8 +3,11 @@ import FacebookMono from "../assets/images/Facebook_Logo_Secondary-2084x2084.png
 
 const Contact = () => {
   return (
-    <>
-      <h1>Contact Nøkian Monark</h1>
+    <article className="contact-page">
+      <header>
+        <h1>Contact Nøkian Monark</h1>
+      </header>
+
       <section>
         <h2>Have questions? Trouble with order?</h2>
         <form
@@ -13,16 +16,19 @@ const Contact = () => {
         >
           <fieldset>
             <legend>Contact us!</legend>
+
             <p>
               <label htmlFor="name">Name:</label>
               <br />
               <input type="text" id="name" name="name" required />
             </p>
+
             <p>
               <label htmlFor="email">Email:</label>
               <br />
               <input type="email" id="email" name="email" required />
             </p>
+
             <p>
               <label htmlFor="message">Message:</label>
               <br />
@@ -35,43 +41,57 @@ const Contact = () => {
                 required
               />
             </p>
-            <button type="submit">Send</button>
           </fieldset>
+
+          <div className="form-actions">
+            <button type="submit">Send</button>
+          </div>
         </form>
       </section>
-      <section style={{ backgroundColor: "grey" }}>
-        <figure>
-          <a
-            href="https://www.youtube.com/@nkianmonark9614"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={YouTubeMono}
-              alt="Monochrome dark YouTube -logo"
-              width={734}
-              height={518}
-              style={{ width: "5rem", height: "3.53rem", margin: "1rem" }}
-            />
-          </a>
-        </figure>
-        <figure>
-          <a
-            href="https://www.facebook.com/nokianmonark/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={FacebookMono}
-              alt="Monochrome white Facebook -logo"
-              width={2084}
-              height={2084}
-              style={{ width: "5rem", height: "5rem", margin: "1rem" }}
-            />
-          </a>
-        </figure>
-      </section>
-    </>
+
+      <footer style={{ backgroundColor: "grey" }}>
+        <h2>Follow us</h2>
+        <ul
+          className="social-links"
+          style={{ listStyle: "none", padding: 0, display: "flex" }}
+        >
+          <li style={{ marginRight: "1rem" }}>
+            <a
+              href="https://www.youtube.com/@nkianmonark9614"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {/* visually‑hidden text instead of aria-label (more robust) */}
+              <span className="visually-hidden">Visit our YouTube channel</span>
+              <img
+                src={YouTubeMono}
+                alt="Nøkian Monark on YouTube"
+                width={734}
+                height={518}
+                style={{ width: "5rem", height: "3.53rem" }}
+              />
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://www.facebook.com/nokianmonark/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="visually-hidden">Visit our Facebook</span>
+              <img
+                src={FacebookMono}
+                alt="Nøkian Monark on Facebook"
+                width={2084}
+                height={2084}
+                style={{ width: "5rem", height: "5rem" }}
+              />
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </article>
   );
 };
 

@@ -54,12 +54,18 @@ const Post = ({ post, posts, setPosts }) => {
           onCancel={() => setEditing(false)}
         />
       ) : (
-        <>
-          <h3>{post.title}</h3>
+        <article className="post" aria-labelledby={`post-${post.id}-title`}>
+          <h3 id={`post-${post.id}-title`}>{post.title}</h3>
           <p>{post.content}</p>
-          <button onClick={() => setEditing(true)}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
-        </>
+          <div className="post-actions">
+            <button type="button" onClick={() => setEditing(true)}>
+              Edit
+            </button>
+            <button type="button" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        </article>
       )}
     </li>
   );

@@ -11,6 +11,7 @@ const Login = ({ user, setUser }) => {
   const [password, setPassword] = useState("");
   const [uuidValid, setUuidValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
   const { uuid } = useParams();
 
   // effect for validating the UUID on component mount
@@ -50,13 +51,21 @@ const Login = ({ user, setUser }) => {
       })
       .catch((error) => {
         console.error("Login failed", error);
+        setError("Invalid username or password");
         setUsername("");
         setPassword("");
         toast.error("Login failed, check credentials!");
       });
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  // render Loading... while UUID validity is checked
+  if (isLoading)
+    // announces loading state to AT users automatically.
+    return (
+      <p role="status" aria-live="polite">
+        Loading...
+      </p>
+    );
 
   // Redirect to home if uuid not correct
   if (!uuidValid) return <Navigate to="/" replace />;
@@ -67,38 +76,54 @@ const Login = ({ user, setUser }) => {
   }
 
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <fieldset>
-          <legend>Login Info</legend>
-          <p>
-            <label htmlFor="userName">username:</label>
-            <input
-              type="text"
-              name="userName"
-              id="userName"
-              autoComplete="on"
-              required
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </p>
-          <p>
-            <label htmlFor="password">password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              required
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </p>
-        </fieldset>
-        <button type="submit">Login</button>
-      </form>
-    </>
+    <main>
+      <article className="login-page">
+        <header>
+          <h1>Login</h1>
+        </header>
+
+        <form onSubmit={handleLogin}>
+          <fieldset>
+            <legend>Login Info</legend>
+
+            {error && (
+              <p className="error" role="alert">
+                {error}
+              </p>
+            )}
+
+            <div className="form-field">
+              <label htmlFor="userName">Username:</label>
+              <input
+                type="text"
+                name="userName"
+                id="userName"
+                autoComplete="on"
+                required
+                value={username}
+                onChange={({ target }) => setUsername(target.value)}
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </div>
+          </fieldset>
+
+          <div className="form-actions">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </article>
+    </main>
   );
 };
 
