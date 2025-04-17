@@ -17,19 +17,23 @@ const Product = ({ product, products, setProducts }) => {
   };
 
   return (
-    <>
-      <li>
-        <h3>{product.name}</h3>
+    <article className="product" aria-labelledby={`product-${product.id}-name`}>
+      <header>
+        <h3 id={`product-${product.id}-name`}>{product.name}</h3>
         <p>
           <em>{product.description}</em>
         </p>
-        <figure>
-          <img
-            src={product.imageUrl}
-            alt={`Image of ${product.name}`}
-            style={{ width: "15rem" }}
-          />
-        </figure>
+      </header>
+
+      <figure>
+        <img
+          src={product.imageUrl}
+          alt={`Image of ${product.name}`}
+          style={{ width: "15rem", borderRadius: 4 }}
+        />
+      </figure>
+
+      <section>
         <p>
           <strong>Price:</strong> {product.price} €
         </p>
@@ -39,6 +43,7 @@ const Product = ({ product, products, setProducts }) => {
             <strong>Material:</strong> {product.material}
           </p>
         )}
+
         <p>
           <strong>Category:</strong> {product.category}
         </p>
@@ -69,17 +74,18 @@ const Product = ({ product, products, setProducts }) => {
         <p>
           <strong>Available: {String(product.available)}</strong>
         </p>
+      </section>
 
-        {editing && (
-          <EditProductForm product={product} onUpdate={handleUpdate} />
-        )}
+      {editing && <EditProductForm product={product} onUpdate={handleUpdate} />}
 
-        <br />
-      </li>
-      <button onClick={() => setEditing(!editing)}>
-        {editing ? "Cancel editing" : "Edit product"}
-      </button>
-    </>
+      <footer style={{ marginTop: "1rem" }}>
+        <div className="product-actions">
+          <button onClick={() => setEditing(!editing)}>
+            {editing ? "Cancel editing" : "Edit"}
+          </button>
+        </div>
+      </footer>
+    </article>
   );
 };
 

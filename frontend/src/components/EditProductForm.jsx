@@ -73,11 +73,13 @@ const EditProductForm = ({ product, onUpdate }) => {
   };
 
   return (
-    <>
+    <section aria-labelledby={`edit-product-${product.id}-heading`}>
+      <h3 id={`edit-product-${product.id}-heading`}>Edit product</h3>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Edit product</legend>
-          <p>
+          <legend>Editing form</legend>
+
+          <div className="form-field">
             <label htmlFor="name">Name:</label>
             <br />
             <input
@@ -87,8 +89,9 @@ const EditProductForm = ({ product, onUpdate }) => {
               value={formData.name}
               onChange={handleChange}
             />
-          </p>
-          <p>
+          </div>
+
+          <div className="form-field">
             <label htmlFor="description">Description:</label>
             <br />
             <textarea
@@ -99,25 +102,25 @@ const EditProductForm = ({ product, onUpdate }) => {
               value={formData.description}
               onChange={handleChange}
             />
-          </p>
+          </div>
 
-          <legend>Category:</legend>
+          <legend className="visually-hidden">Product category</legend>
+          <p>Category:</p>
           {["apparel", "media", "accessory"].map((option) => (
-            <label key={option}>
+            <div key={option}>
               <input
                 type="radio"
                 name="category"
-                id="category"
+                id={`category-${option}`}
                 value={option}
                 checked={formData.category === option}
                 onChange={handleChange}
               />
-              {option}
-              <br />
-            </label>
+              <label htmlFor={`category-${option}`}>{option}</label>
+            </div>
           ))}
 
-          <p>
+          <div className="form-field">
             <label htmlFor="imageUrl">
               Image URL: (must start with /images/)
             </label>
@@ -129,8 +132,9 @@ const EditProductForm = ({ product, onUpdate }) => {
               value={formData.imageUrl}
               onChange={handleChange}
             />
-          </p>
-          <p>
+          </div>
+
+          <div className="form-field">
             <label htmlFor="material">Material:</label>
             <br />
             <input
@@ -140,28 +144,29 @@ const EditProductForm = ({ product, onUpdate }) => {
               value={formData.material}
               onChange={handleChange}
             />
-          </p>
+          </div>
 
           {mode === "sizes" && (
-            <>
-              <p>Sizes:</p>
+            <fieldset>
+              <legend>Sizes inventory</legend>
               {["S", "M", "L", "XL"].map((size) => (
-                <label key={size}>
-                  {size}:
+                <div key={size} className="form-field">
+                  <label htmlFor={`size_${size}`}>{size}:</label>
                   <input
                     type="number"
+                    id={`size_${size}`}
                     name={`size_${size}`}
                     value={formData.sizes?.[size] || 0}
                     onChange={handleChange}
                     min={0}
                   />
-                </label>
+                </div>
               ))}
-            </>
+            </fieldset>
           )}
 
           {mode === "quantity" && (
-            <p>
+            <div className="form-field">
               <label htmlFor="quantity">Quantity:</label>
               <br />
               <input
@@ -172,10 +177,10 @@ const EditProductForm = ({ product, onUpdate }) => {
                 onChange={handleChange}
                 min={0}
               />
-            </p>
+            </div>
           )}
 
-          <p>
+          <div className="form-field">
             <label htmlFor="available">Available:</label>
             <br />
             <input
@@ -185,8 +190,9 @@ const EditProductForm = ({ product, onUpdate }) => {
               checked={formData.available}
               onChange={handleChange}
             />
-          </p>
-          <p>
+          </div>
+
+          <div className="form-field">
             <label htmlFor="price">Price (€):</label>
             <br />
             <input
@@ -198,13 +204,16 @@ const EditProductForm = ({ product, onUpdate }) => {
               step="0.01"
               min="0"
             />
-          </p>
+          </div>
 
           <br />
-          <button type="submit">Save changes</button>
+
+          <div className="form-actions">
+            <button type="submit">Save changes</button>
+          </div>
         </fieldset>
       </form>
-    </>
+    </section>
   );
 };
 

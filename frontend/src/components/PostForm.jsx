@@ -65,11 +65,11 @@ const PostForm = ({ posts, setPosts }) => {
               onChange={({ target }) => setContent(target.value)}
             />
           </div>
-        </fieldset>
 
-        <div className="form-actions">
-          <button type="submit">Create post</button>
-        </div>
+          <div className="form-actions">
+            <button type="submit">Create post</button>
+          </div>
+        </fieldset>
       </form>
     </section>
   );

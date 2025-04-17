@@ -94,6 +94,7 @@ const Login = ({ user, setUser }) => {
 
             <div className="form-field">
               <label htmlFor="userName">Username:</label>
+              <br />
               <input
                 type="text"
                 name="userName"
@@ -107,6 +108,7 @@ const Login = ({ user, setUser }) => {
 
             <div className="form-field">
               <label htmlFor="password">Password:</label>
+              <br />
               <input
                 type="password"
                 name="password"

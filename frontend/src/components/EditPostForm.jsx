@@ -30,10 +30,10 @@ const EditPostForm = ({ post, onUpdate, onCancel }) => {
 
   return (
     <section aria-labelledby={`edit-post-${post.id}-heading`}>
-      <h3 id={`edit-post-${post.id}-heading`}>Edit Post</h3>
+      <h3 id={`edit-post-${post.id}-heading`}>Edit post</h3>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Edit post</legend>
+          <legend>Editing form</legend>
 
           <div className="form-field">
             <label htmlFor="title">Post title:</label>
@@ -59,14 +59,14 @@ const EditPostForm = ({ post, onUpdate, onCancel }) => {
               onChange={({ target }) => setContent(target.value)}
             />
           </div>
-        </fieldset>
 
-        <div className="form-actions">
-          <button type="submit">Save changes</button>
-          <button type="button" onClick={onCancel}>
-            Cancel
-          </button>
-        </div>
+          <div className="form-actions">
+            <button type="submit">Save changes</button>
+            <button type="button" onClick={onCancel}>
+              Cancel
+            </button>
+          </div>
+        </fieldset>
       </form>
     </section>
   );

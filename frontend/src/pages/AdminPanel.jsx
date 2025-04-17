@@ -68,7 +68,7 @@ const AdminPanel = ({
 
         <section>
           <h2>Manage products</h2>
-          <ul>
+          <div className="product-grid">
             {products.map((product) => (
               <Product
                 key={product.id}
@@ -77,7 +77,7 @@ const AdminPanel = ({
                 setProducts={setProducts}
               />
             ))}
-          </ul>
+          </div>
         </section>
       </main>
 

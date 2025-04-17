@@ -1,32 +1,35 @@
 import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
-  const padding = {
-    paddingRight: 5,
-  };
-
   // selvitä, onko parempi käyttää id:tä vai classname:a
   return (
     <header>
       <nav aria-label="primary-navigation">
-        <Link to="/" style={padding}>
-          Home
-        </Link>
-        {/* <Link to="/news" style={padding}>
+        <ul className="nav-list">
+          <li className="nav-item">
+            <Link to="/">Home</Link>
+          </li>
+
+          {/* <Link to="/news" style={padding}>
           News
         </Link> */}
-        <Link to="/music" style={padding}>
-          Music
-        </Link>
-        <Link to="/shop" style={padding}>
-          Shop
-        </Link>
-        <Link to="/band" style={padding}>
-          Band
-        </Link>
-        <Link to="/contact" style={padding}>
-          Contact
-        </Link>
+
+          <li className="nav-item">
+            <Link to="/music">Music</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/shop">Shop</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/band">Band</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
       </nav>
     </header>
   );
