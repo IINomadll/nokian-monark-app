@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,6 +20,8 @@ import Music from "./pages/Music";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import AdminPanel from "./pages/AdminPanel";
+
+import CartProvider from "./context/CartContext";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -70,7 +73,7 @@ const App = () => {
   );
 
   return (
-    <>
+    <CartProvider>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home posts={sortedPosts} />} />
@@ -78,7 +81,7 @@ const App = () => {
         <Route path="/band" element={<Band />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/music" element={<Music />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Shop products={products} />} />
         <Route
           path="/administrate/:uuid"
           element={<Login user={user} setUser={setUser} />}
@@ -113,7 +116,7 @@ const App = () => {
         transition={Slide}
       />
       <Footer />
-    </>
+    </CartProvider>
   );
 };
 

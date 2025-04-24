@@ -6,7 +6,7 @@ import userService from "../utils/userService";
 import tokenService from "../services/token";
 import PostForm from "../components/PostForm";
 import Post from "../components/Post";
-import Product from "../components/Product";
+import AdminProduct from "../components/AdminProduct";
 import BackToTopButton from "../components/BackToTopButton";
 
 const AdminPanel = ({
@@ -70,7 +70,7 @@ const AdminPanel = ({
           <h2>Manage products</h2>
           <div className="product-grid">
             {products.map((product) => (
-              <Product
+              <AdminProduct
                 key={product.id}
                 product={product}
                 products={products}

@@ -1,21 +1,4 @@
-import { useState } from "react";
-import { toast } from "react-toastify";
-
-import EditProductForm from "./EditProductForm";
-
-const Product = ({ product, products, setProducts }) => {
-  const [editing, setEditing] = useState(false);
-
-  const handleUpdate = (updatedProduct) => {
-    console.log("handleUpdate called!");
-    const updatedProductList = products.map((p) =>
-      p.id === updatedProduct.id ? updatedProduct : p
-    );
-    setProducts(updatedProductList);
-    setEditing(false); // auto close form on save
-    toast.success("Product updated!");
-  };
-
+const Product = ({ product, onAddToCart }) => {
   return (
     <article className="product" aria-labelledby={`product-${product.id}-name`}>
       <header>
@@ -48,43 +31,22 @@ const Product = ({ product, products, setProducts }) => {
           <strong>Category:</strong> {product.category}
         </p>
 
-        {product.quantity != null ? (
+        {product.available ? (
           <p>
-            <strong>Quantity:</strong> {product.quantity}
+            <strong>In stock</strong>
           </p>
-        ) : product.sizes ? (
-          <div>
-            <p>
-              <strong>Sizes inventory:</strong>
-            </p>
-            <ul>
-              {Object.entries(product.sizes).map(([size, qty]) => (
-                <li key={size}>
-                  <strong>{size}:</strong> {qty}
-                </li>
-              ))}
-            </ul>
-          </div>
         ) : (
           <p>
-            <em>No inventory info available</em>
+            <strong>Out of stock</strong>
           </p>
         )}
-
-        <p>
-          <strong>Available: {String(product.available)}</strong>
-        </p>
       </section>
 
-      {editing && <EditProductForm product={product} onUpdate={handleUpdate} />}
-
-      <footer style={{ marginTop: "1rem" }}>
-        <div className="product-actions">
-          <button onClick={() => setEditing(!editing)}>
-            {editing ? "Cancel editing" : "Edit"}
-          </button>
-        </div>
-      </footer>
+      {product.available && (
+        <footer style={{ marginTop: "1rem" }}>
+          <button onClick={() => onAddToCart(product)}>Add to cart</button>
+        </footer>
+      )}
     </article>
   );
 };
