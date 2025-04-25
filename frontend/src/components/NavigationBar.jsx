@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
 const NavigationBar = () => {
-  // selvitä, onko parempi käyttää id:tä vai classname:a
+  const { cart } = useCart();
+
   return (
     <header>
       <nav aria-label="primary-navigation">
@@ -9,10 +11,6 @@ const NavigationBar = () => {
           <li className="nav-item">
             <Link to="/">Home</Link>
           </li>
-
-          {/* <Link to="/news" style={padding}>
-          News
-        </Link> */}
 
           <li className="nav-item">
             <Link to="/music">Music</Link>
@@ -29,28 +27,16 @@ const NavigationBar = () => {
           <li className="nav-item">
             <Link to="/contact">Contact</Link>
           </li>
+
+          {cart.length > 0 && (
+            <li className="nav-item">
+              <Link to="/cart-summary">🛒</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
   );
 };
-
-/* tämä oli react dinerin tyyli, mitä etuja tässä?
-<header className="navHeader">
-  <nav>
-    <ul className="list">
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/posts">Posts</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-    </ul>
-  </nav>
-</header>
-*/
 
 export default NavigationBar;

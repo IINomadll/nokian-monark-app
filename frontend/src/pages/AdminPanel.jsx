@@ -45,7 +45,9 @@ const AdminPanel = ({
           <p>
             Logged in as <strong>{user.username}</strong>
           </p>
-          <button onClick={handleLogout}>Logout</button>
+          <button type="button" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </header>
 

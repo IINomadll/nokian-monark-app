@@ -1,6 +1,6 @@
 const Band = () => {
   return (
-    <article className="band-page">
+    <article className="page">
       <header>
         <h1>Nøkian Monark</h1>
       </header>

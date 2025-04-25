@@ -80,7 +80,7 @@ const AdminProduct = ({ product, products, setProducts }) => {
 
       <footer style={{ marginTop: "1rem" }}>
         <div className="product-actions">
-          <button onClick={() => setEditing(!editing)}>
+          <button type="button" onClick={() => setEditing(!editing)}>
             {editing ? "Cancel editing" : "Edit"}
           </button>
         </div>

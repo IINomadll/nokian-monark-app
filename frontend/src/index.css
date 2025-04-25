@@ -2,6 +2,14 @@
   color-scheme: default;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

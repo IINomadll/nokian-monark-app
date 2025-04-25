@@ -2,7 +2,7 @@ import BackToTopButton from "../components/BackToTopButton";
 
 const Music = () => {
   return (
-    <article className="music-page">
+    <article className="page">
       <header>
         <h1>Music</h1>
         <p>Music releases and embeddings will be on this page</p>

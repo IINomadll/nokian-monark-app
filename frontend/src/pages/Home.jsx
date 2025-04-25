@@ -2,7 +2,7 @@ import BackToTopButton from "../components/BackToTopButton";
 
 const Home = ({ posts }) => {
   return (
-    <article className="home-page">
+    <article className="page">
       <header>
         <h1>Nøkian Monark App</h1>
         <p>Welcome to the main page</p>

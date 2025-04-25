@@ -3,7 +3,7 @@ import FacebookMono from "../assets/images/Facebook_Logo_Secondary-2084x2084.png
 
 const Contact = () => {
   return (
-    <article className="contact-page">
+    <article className="page">
       <header>
         <h1>Contact Nøkian Monark</h1>
       </header>

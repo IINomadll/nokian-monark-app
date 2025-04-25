@@ -77,7 +77,7 @@ const Login = ({ user, setUser }) => {
 
   return (
     <main>
-      <article className="login-page">
+      <article className="page">
         <header>
           <h1>Login</h1>
         </header>

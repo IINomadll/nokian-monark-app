@@ -12,7 +12,6 @@ import Footer from "./components/Footer";
 import NavigationBar from "./components/NavigationBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-// import News from "./pages/News";
 import Home from "./pages/Home";
 import Band from "./pages/Band";
 import Contact from "./pages/Contact";
@@ -20,6 +19,7 @@ import Music from "./pages/Music";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import AdminPanel from "./pages/AdminPanel";
+import NotFound from "./pages/NotFound";
 
 import CartProvider from "./context/CartContext";
 
@@ -73,35 +73,37 @@ const App = () => {
   );
 
   return (
-    <CartProvider>
-      <NavigationBar />
-      <Routes>
-        <Route path="/" element={<Home posts={sortedPosts} />} />
-        {/* <Route path="/news" element={<News posts={sortedPosts} />} /> */}
-        <Route path="/band" element={<Band />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/music" element={<Music />} />
-        <Route path="/shop" element={<Shop products={products} />} />
-        <Route
-          path="/administrate/:uuid"
-          element={<Login user={user} setUser={setUser} />}
-        />
-        <Route
-          path="/administrate/panel"
-          element={
-            <ProtectedRoute user={user}>
-              <AdminPanel
-                user={user}
-                setUser={setUser}
-                posts={sortedPosts}
-                setPosts={setPosts}
-                products={products}
-                setProducts={setProducts}
-              />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+    <>
+      <CartProvider>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home posts={sortedPosts} />} />
+          <Route path="/band" element={<Band />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/shop" element={<Shop products={products} />} />
+          <Route
+            path="/administrate/:uuid"
+            element={<Login user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/administrate/panel"
+            element={
+              <ProtectedRoute user={user}>
+                <AdminPanel
+                  user={user}
+                  setUser={setUser}
+                  posts={sortedPosts}
+                  setPosts={setPosts}
+                  products={products}
+                  setProducts={setProducts}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </CartProvider>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -116,7 +118,7 @@ const App = () => {
         transition={Slide}
       />
       <Footer />
-    </CartProvider>
+    </>
   );
 };
 

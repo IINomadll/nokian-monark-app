@@ -1,16 +1,22 @@
+import { toast } from "react-toastify";
 import { useCart } from "../hooks/useCart";
-import Product from "../components/Product";
 import { ACTIONS } from "../context/CartContext";
 
-const Shop = ({ products }) => {
-  const { dispatch } = useCart();
+import Product from "../components/Product";
+import BackToTopButton from "../components/BackToTopButton";
 
-  const handleAddToCart = (product) => {
-    dispatch({ type: ACTIONS.ADD_ITEM, payload: { product } });
+const Shop = ({ products }) => {
+  const { cart, dispatch } = useCart();
+
+  if (cart.length > 0) console.log("cart state:", cart);
+
+  const handleAddToCart = (cartItem) => {
+    dispatch({ type: ACTIONS.ADD_ITEM, payload: cartItem });
+    toast.success(`${cartItem.name} added to cart!`);
   };
 
   return (
-    <article className="shop-page">
+    <article className="page">
       <header>
         <h1>Shop</h1>
       </header>
@@ -24,6 +30,10 @@ const Shop = ({ products }) => {
           />
         ))}
       </section>
+
+      <footer>
+        <BackToTopButton />
+      </footer>
     </article>
   );
 };
