@@ -6,9 +6,7 @@ import Product from "../components/Product";
 import BackToTopButton from "../components/BackToTopButton";
 
 const Shop = ({ products }) => {
-  const { cart, dispatch } = useCart();
-
-  if (cart.length > 0) console.log("cart state:", cart);
+  const { dispatch } = useCart();
 
   const handleAddToCart = (cartItem) => {
     dispatch({ type: ACTIONS.ADD_ITEM, payload: cartItem });

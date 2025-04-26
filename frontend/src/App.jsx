@@ -19,6 +19,7 @@ import Music from "./pages/Music";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import AdminPanel from "./pages/AdminPanel";
+import CartSummary from "./pages/CartSummary";
 import NotFound from "./pages/NotFound";
 
 import CartProvider from "./context/CartContext";
@@ -82,6 +83,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/music" element={<Music />} />
           <Route path="/shop" element={<Shop products={products} />} />
+          <Route path="/cart-summary" element={<CartSummary />} />
           <Route
             path="/administrate/:uuid"
             element={<Login user={user} setUser={setUser} />}

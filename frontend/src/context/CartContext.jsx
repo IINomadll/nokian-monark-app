@@ -10,7 +10,7 @@ const CART_STORAGE_KEY = "nm-cart";
 // action types
 export const ACTIONS = {
   ADD_ITEM: "add-item",
-  UPDATE_QUANTITY: "update-quantity",
+  UPDATE_ITEM_QUANTITY: "update-item-quantity",
   DELETE_ITEM: "delete-item",
   CLEAR_CART: "clear-cart",
 };
@@ -29,7 +29,7 @@ const cartReducer = (state, action) => {
       }
       return [...state, action.payload];
     }
-    case ACTIONS.UPDATE_QUANTITY:
+    case ACTIONS.UPDATE_ITEM_QUANTITY:
       return state.map((item) =>
         item.id === action.payload.id
           ? { ...item, quantity: action.payload.quantity }

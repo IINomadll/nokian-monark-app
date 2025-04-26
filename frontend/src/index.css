@@ -34,12 +34,30 @@ button:disabled {
   text-decoration: none;
 }
 
+.cart-list {
+  list-style: none;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  max-width: fit-content;
+}
+
 .product {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
   max-width: 25rem;
+}
+
+.quantity-div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* .product-grid {
