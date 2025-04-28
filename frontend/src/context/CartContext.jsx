@@ -19,24 +19,39 @@ export const ACTIONS = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_ITEM: {
-      const existingItem = state.find((item) => item.id === action.payload.id);
+      const existingItem = state.find(
+        (item) =>
+          item.id === action.payload.id &&
+          item.selectedSize === action.payload.selectedSize
+      );
       if (existingItem) {
         return state.map((item) =>
-          item.id === action.payload.id
+          item.id === action.payload.id &&
+          item.selectedSize === action.payload.selectedSize
             ? { ...item, quantity: item.quantity + action.payload.quantity }
             : item
         );
       }
       return [...state, action.payload];
     }
-    case ACTIONS.UPDATE_ITEM_QUANTITY:
+    case ACTIONS.UPDATE_ITEM_QUANTITY: {
+      if (action.payload.quantity < 1) return state;
+
       return state.map((item) =>
-        item.id === action.payload.id
+        item.id === action.payload.id &&
+        item.selectedSize === action.payload.selectedSize
           ? { ...item, quantity: action.payload.quantity }
           : item
       );
+    }
     case ACTIONS.DELETE_ITEM:
-      return state.filter((item) => item.id !== action.payload);
+      return state.filter(
+        (item) =>
+          !(
+            item.id === action.payload.id &&
+            item.selectedSize === action.payload.selectedSize
+          )
+      );
     case ACTIONS.CLEAR_CART:
       return [];
     default:

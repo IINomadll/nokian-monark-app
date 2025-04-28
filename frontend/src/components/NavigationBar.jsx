@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 
+import "../styles/NavigationBar.css";
+
 const NavigationBar = () => {
   const { cart } = useCart();
 
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
-    <header>
+    <header className="nav-header">
       <nav aria-label="primary-navigation">
         <ul className="nav-list">
           <li className="nav-item">
@@ -28,9 +32,11 @@ const NavigationBar = () => {
             <Link to="/contact">Contact</Link>
           </li>
 
-          {cart.length > 0 && (
-            <li className="nav-item">
-              <Link to="/cart-summary">🛒</Link>
+          {totalItems > 0 && (
+            <li className="nav-item cart-link">
+              <Link to="/cart-summary">
+                🛒<span className="cart-badge">{totalItems}</span>
+              </Link>
             </li>
           )}
         </ul>
