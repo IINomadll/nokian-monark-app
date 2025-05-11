@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-// created: {
-//   type: Date,
-//   required: true,
-// }
-
 const postSchema = new mongoose.Schema(
   {
     title: {
