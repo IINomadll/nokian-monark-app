@@ -7,6 +7,7 @@ let SECRET = process.env.SECRET;
 let PASSWORD = process.env.PASSWORD; // not set in .env atm
 let ADMIN_UUID = process.env.ADMIN_UUID;
 let STRIPE_API_TEST_KEY = process.env.STRIPE_API_TEST_KEY;
+let FRONTEND_URL = "http://localhost:5173";
 
 module.exports = {
   PORT,
@@ -16,4 +17,5 @@ module.exports = {
   PASSWORD,
   ADMIN_UUID,
   STRIPE_API_TEST_KEY,
+  FRONTEND_URL,
 };

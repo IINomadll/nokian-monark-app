@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useCart } from "../hooks/useCart";
 import { ACTIONS } from "../context/CartContext";
 
+import checkout from "../services/checkout";
+
 import "../styles/CartSummary.css";
 
 const CartSummary = () => {
@@ -30,6 +32,17 @@ const CartSummary = () => {
       type: ACTIONS.DELETE_ITEM,
       payload: { id, selectedSize },
     });
+  };
+
+  const handleProceedToCheckout = () => {
+    checkout(cart)
+      .then((url) => {
+        window.location.href = url;
+      })
+      .catch((error) => {
+        console.error("checkout failed:", error);
+        alert("Failed to redirect to checkout. Please try again.");
+      });
   };
 
   const getTotalPrice = () => {
@@ -143,6 +156,9 @@ const CartSummary = () => {
               {getTotalPrice().toFixed(2)} €
             </strong>
           </h2>
+          <button type="submit" onClick={handleProceedToCheckout}>
+            Checkout
+          </button>
         </section>
       )}
     </article>

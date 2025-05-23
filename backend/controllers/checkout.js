@@ -1,11 +1,13 @@
 const checkoutRouter = require("express").Router();
 const Product = require("../models/product");
+const { FRONTEND_URL } = require("../utils/config");
 
 const { STRIPE_API_TEST_KEY } = require("../utils/config");
 const stripe = require("stripe")(STRIPE_API_TEST_KEY);
 
 checkoutRouter.post("/create-checkout-session", async (request, response) => {
   const cart = request.body.cart;
+  console.log("Incoming cart payload:", cart);
 
   if (!Array.isArray(cart) || cart.length === 0)
     return response.status(400).json({ error: "Invalid cart data" });
@@ -26,15 +28,17 @@ checkoutRouter.post("/create-checkout-session", async (request, response) => {
 
       const name = matched.name;
       const unit_amount = Math.round(matched.price * 100); // stripe wants price in cents
-      const description = item.selectedSize ? `Size: ${item.selectedSize}` : "";
+
+      console.log("item.quantity =", item.quantity);
+      const product_data = { name };
+      if (item.selectedSize) {
+        product_data.description = `Size: ${item.selectedSize}`;
+      }
 
       return {
         price_data: {
           currency: "eur",
-          product_data: {
-            name,
-            description,
-          },
+          product_data,
           unit_amount,
         },
         quantity: item.quantity,
@@ -45,8 +49,8 @@ checkoutRouter.post("/create-checkout-session", async (request, response) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items,
-      success_url: "http://localhost:5173/order/confirmation",
-      cancel_url: "http://localhost:5173/cart-summary",
+      success_url: `${FRONTEND_URL}/checkout?success=true`,
+      cancel_url: `${FRONTEND_URL}/cart-summary`,
     });
 
     response.status(200).json({ url: session.url });
