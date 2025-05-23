@@ -8,6 +8,8 @@ import BackToTopButton from "../components/BackToTopButton";
 const Shop = ({ products }) => {
   const { dispatch } = useCart();
 
+  const availableProducts = products.filter((p) => p.available);
+
   const handleAddToCart = (cartItem) => {
     dispatch({ type: ACTIONS.ADD_ITEM, payload: cartItem });
     toast.success(`${cartItem.name} added to cart!`);
@@ -20,7 +22,7 @@ const Shop = ({ products }) => {
       </header>
 
       <section className="shop-grid">
-        {products.map((product) => (
+        {availableProducts.map((product) => (
           <Product
             key={product.id}
             product={product}

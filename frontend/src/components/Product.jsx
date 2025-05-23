@@ -73,7 +73,7 @@ const Product = ({ product, onAddToCart }) => {
           <strong>Category:</strong> {product.category}
         </p>
 
-        {!product.available && (
+        {isOutOfStock && (
           <p>
             <strong>Out of stock</strong>
           </p>

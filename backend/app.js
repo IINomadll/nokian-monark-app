@@ -6,6 +6,7 @@ const loginRouter = require("./controllers/login");
 const postsRouter = require("./controllers/posts");
 const adminRouter = require("./controllers/admin");
 const productsRouter = require("./controllers/products");
+const checkoutRouter = require("./controllers/checkout");
 const middleware = require("./utils/middleware");
 const mongoose = require("mongoose");
 
@@ -21,7 +22,11 @@ mongoose
     console.error("error connecting to MongoDB:", error.message);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
 app.use(middleware.requestLogger);
 
@@ -33,6 +38,7 @@ app.use("/api/posts", postsRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/products", productsRouter);
+app.use("/api/checkout", checkoutRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.myErrorHandler);
